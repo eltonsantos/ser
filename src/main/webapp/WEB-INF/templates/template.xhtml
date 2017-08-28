@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/admin.xhtml">
+
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="showcase.css"/>
+        <h:outputStylesheet library="css" name="prism.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome-jsf.css" />
+
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+
+        <title>SER - Sistema de Extensão de Rede | CAGECE - GEFAR</title>
+    </ui:define>
+
+    <ui:define name="logo-lg">
+        Extensão de Rede | SER
+    </ui:define>
+
+    <ui:define name="logo-mini">
+        SER
+    </ui:define>
+
+    <ui:define name="menu-begin">
+        <ui:include src="/includes/menu-search.xhtml"/>
+    </ui:define>
+
+     <ui:define name="menu">
+         <ui:include src="/includes/menu.xhtml"/>
+     </ui:define>
+
+    <ui:define name="top-menu">
+        <ui:include src="/includes/top-menu.xhtml"/>
+    </ui:define>
+    
+    <ui:define name="content-end">
+        <section class="content">
+            <ui:insert name="code"/>
+        </section>
+    </ui:define>
+
+    <ui:define name="footer">
+        <a target="_blank"
+           href="http://cagece.com.br/">
+            Copyright &copy; 2017 - CAGECE | GEFAR - Gerência de Faturamento e Arrecadação
+        </a>
+        <div class="pull-right hidden-xs" style="color: gray">
+            <i>v1.0</i>
+        </div>
+
+        <h:outputScript library="js" name="prism.js"  target="head"/>
+        <h:outputScript library="js" name="jquery.mask.js"  target="head"/>
+        <h:outputScript library="js" name="scripts.js"  target="head"/>
+        
+    </ui:define>
+
+</ui:composition>
