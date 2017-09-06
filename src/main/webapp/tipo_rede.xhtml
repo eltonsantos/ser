@@ -7,14 +7,57 @@
         xmlns:p="http://primefaces.org/ui"
         template="/WEB-INF/templates/template.xhtml">
 	
-    <f:metadata>
-    </f:metadata>
+    <f:metadata></f:metadata>
 
     <ui:define name="title">
         Cadastrar Tipo da Rede
     </ui:define>
 
     <ui:define name="body">
+        
+        <h:form id="tipo_rede">
+            <h:messages id="messages" />
+            
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12">
+                    <p:outputLabel for="descricao_produto" value="Tipo de produto: " />
+                </div>
+                <div class="ui-g-12">
+                    <p:selectOneMenu id="descricao_produto" value="#{tipoRedeBean.tipoRede.produto}"
+                                     class="form-control"
+                                     required="true"
+                                     requiredMessage="Escolha um tipo de produto">
+                        <f:selectItem itemLabel="Selecione"/>
+                        <f:selectItem itemLabel="Água" itemValue="AGUA"/>
+                        <f:selectItem itemLabel="Esgoto" itemValue="ESGOTO"/>								
+                    </p:selectOneMenu>
+                </div>
+                
+                <div class="ui-g-12">
+                    <p:outputLabel for="descricao_tipo_rede" value="Descrição: " />
+                </div>
+                <div class="ui-g-12">
+                    <p:inputText id="descricao_tipo_rede"
+                                 required="true" requiredMessage="Descrição obrigatória"
+                                 value="#{tipoRedeBean.tipoRede.descricao}" styleClass="form-control" />
+                </div>
+                
+                <div class="ui-g-12">
+                    <p:outputLabel for="observacao_tipo_rede" value="Observação: " />
+                </div>
+                <div class="ui-g-12">
+                    <p:inputText id="observacao_tipo_rede" value="#{tipoRedeBean.tipoRede.observacao}"
+                                 size="4000" styleClass="form-control" />
+                </div>
+         
+                <div class="ui-g-12">
+                    <h:commandButton value="Cadastrar Tipo de Rede"
+                                     class="btn btn-success"
+                                     type="submit" action="#{tipoRedeBean.cadastrarTipoRede}" />
+                </div>
+                
+            </div>
+        </h:form>
         
     </ui:define>
 

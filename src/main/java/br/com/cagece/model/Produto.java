@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.cagece.model;
 
-/**
- *
- * @author 211905
- */
 public enum Produto {
     
+    AGUA("Água"),
+    ESGOTO("Esgoto");
+    
+    private String descricao;
+    
+    Produto(String descricao){
+        this.descricao = descricao;
+    }
+    
+    public String descricao(){
+        return descricao;
+    }
+   
 }
