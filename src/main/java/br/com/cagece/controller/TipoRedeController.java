@@ -1,6 +1,7 @@
 package br.com.cagece.controller;
 
 import br.com.cagece.model.TipoRede;
+import br.com.cagece.util.JPAUtil;
 import br.com.cagece.util.NegocioException;
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +17,7 @@ public class TipoRedeController implements Serializable {
     @Inject
     private EntityManager manager;
     
-    //private TipoRede tipoRede = new TipoRede();
+    private TipoRede tipoRede = new TipoRede();
     private Integer tipoRedeId;
     
     // LISTAR TIPOS DE REDE
@@ -25,8 +26,22 @@ public class TipoRedeController implements Serializable {
     }
     
     // CADASTRAR TIPO DE REDE
-    public TipoRede cadastrarTipoRede(TipoRede tipoRede){
-        return manager.merge(tipoRede);
+    public String cadastrarTipoRede(){
+        
+        manager.getTransaction().begin();
+                
+        if (this.tipoRede.getId() == null) {
+            manager.persist(tipoRede);
+            manager.getTransaction().commit();
+            manager.close();
+            this.tipoRede = new TipoRede();
+        }
+        else {
+            manager.merge(tipoRede);
+            manager.getTransaction().commit();
+            manager.close();
+        }       
+        return "tipo_rede?faces-redirect=true";
     }
     
     // EDITAR TIPO DE REDE
@@ -41,8 +56,7 @@ public class TipoRedeController implements Serializable {
             manager.flush();       
         } catch (Exception e) {
             throw new NegocioException("Tipo de Rede não pode ser excluído!");
-        }
-        
+        }       
     }
     
     // CONSULTA POR ID
@@ -51,6 +65,10 @@ public class TipoRedeController implements Serializable {
     }
     
     // GETTERS AND SETTERS
+    public TipoRede getTipoRede() {
+        return tipoRede;
+    }
+    
     public Integer getTipoRedeId() {
         return tipoRedeId;
     }
