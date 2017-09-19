@@ -1,24 +1,27 @@
 package br.com.cagece.controller;
 
 import br.com.cagece.model.TipoRede;
-import br.com.cagece.util.JPAUtil;
 import br.com.cagece.util.NegocioException;
 import java.io.Serializable;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-@ManagedBean(name = "tipoRedeBean")
 @ViewScoped
+@Named("tipoRedeBean")
 public class TipoRedeController implements Serializable {
     
     @Inject
     private EntityManager manager;
     
-    private TipoRede tipoRede = new TipoRede();
+    private TipoRede tipoRede;
     private Integer tipoRedeId;
+
+    public TipoRedeController() {
+        this.tipoRede = new TipoRede();
+    }
     
     // LISTAR TIPOS DE REDE
     public List<TipoRede> listarTipoRede(){
@@ -49,14 +52,12 @@ public class TipoRedeController implements Serializable {
     }
     
     // EXCLUIR TIPOS DE REDE
-    public void excluirTipoRede(TipoRede tipoRede){
-        try {
-            tipoRede = porId(tipoRede.getId());
-            manager.remove(tipoRede);
-            manager.flush();       
-        } catch (Exception e) {
-            throw new NegocioException("Tipo de Rede não pode ser excluído!");
-        }       
+    public String excluirTipoRede(TipoRede tipoRede){
+        tipoRede = porId(tipoRede.getId());
+        manager.remove(tipoRede);
+        manager.flush();
+        
+        return "tipo_rede?faces-redirect=true";
     }
     
     // CONSULTA POR ID

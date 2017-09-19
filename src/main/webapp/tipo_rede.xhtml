@@ -15,7 +15,7 @@
 
     <ui:define name="body">
         
-        <h:form id="tipo_rede">
+        <h:form id="tipoRede">
             <h:messages id="messages" />
             
             <div class="ui-g ui-fluid">
@@ -88,11 +88,13 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Editar</f:facet>
-                    <h:commandLink value="Editar Tipo de Rede" class="btn btn-info" action="#{tipoRedeBean.editarTipoRede(tipoRede)}"/>
+                    <h:commandLink value="Editar Tipo de Rede"
+                                   class="btn btn-info" action="#{tipoRedeBean.editarTipoRede(tipoRede)}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Excluir</f:facet>
-                    <h:commandLink value="Excluir Tipo de Rede" class="btn btn-danger" action="#{tipoRedeBean.excluirTipoRede(tipoRede)}"/>
+                    <h:commandLink value="Excluir Tipo de Rede"
+                                   class="btn btn-danger" action="#{tipoRedeBean.excluirTipoRede(tipoRede)}"/>
                 </h:column>
             </h:dataTable>
         </h:form>

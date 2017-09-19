@@ -1,6 +1,7 @@
 package br.com.cagece.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,6 +21,7 @@ public class TipoRede implements Serializable {
     @NotEmpty
     private String descricao;
     
+    @Column(columnDefinition = "TEXT")
     private String observacao;
     
     @NotNull
@@ -36,8 +38,6 @@ public class TipoRede implements Serializable {
         return !isInclusao();
     }
     
-    
-
     // GETTERS E SETTERS
     public Integer getId() {
         return id;
