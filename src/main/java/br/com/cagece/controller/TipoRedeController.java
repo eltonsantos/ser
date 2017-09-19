@@ -8,6 +8,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 @ViewScoped
 @Named("tipoRedeBean")
@@ -53,10 +54,11 @@ public class TipoRedeController implements Serializable {
     
     // EXCLUIR TIPOS DE REDE
     public String excluirTipoRede(TipoRede tipoRede){
+        manager.getTransaction().begin();
         tipoRede = porId(tipoRede.getId());
         manager.remove(tipoRede);
         manager.flush();
-        
+        manager.getTransaction().commit();
         return "tipo_rede?faces-redirect=true";
     }
     
