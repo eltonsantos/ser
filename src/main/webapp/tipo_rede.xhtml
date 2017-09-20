@@ -62,9 +62,12 @@
         
         <br />
         <hr />
+        <br />
         
         <!-- LISTAR TIPOS DE REDE CADASTRADAS -->
         <h:form id="formTabelaTipoRede">
+            
+            <h2>Tipos de Redes Cadastradas</h2>
             
             <h:outputText value="No momento ainda não há tipo de rede cadastrado! Por favor cadastre um tipo de rede."
                           class="alert alert-warning ui-g-12"  rendered="#{empty tipoRedeBean.listarTipoRede()}" />
@@ -83,8 +86,14 @@
                     <h:outputText value="#{tipoRede.descricao}" />
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Observação</f:facet>
-                    <h:outputText value="#{tipoRede.observacao}" />
+                    <f:facet name="header">Detalhar</f:facet>                                    
+                    <p:commandButton value="Detalhar"
+                                     oncomplete="PF('detalharTipoRede').show();"
+                                     process="@this"
+                                     update="formDetalharTipoRede">
+                        <f:setPropertyActionListener value="#{tipoRede}"
+                                                     target="#{tipoRedeBean.tipoRede}" />
+                    </p:commandButton>                   
                 </h:column>
                 <h:column>
                     <f:facet name="header">Editar</f:facet>
@@ -98,7 +107,33 @@
                 </h:column>
             </h:dataTable>
         </h:form>
-        
+              
+        <p:dialog header="Detalhar tipo de rede"
+                  widgetVar="detalharTipoRede"
+                  modal="true"
+                  width="500"
+                  height="500"
+                  appendTo="@(body)"
+                  closable="true"
+                  id="formDetalharTipoRede">
+            <h:form>
+                <p:panelGrid>
+                    <div class="ui-g-12">
+                        <h:outputLabel value="Tipo do produto " class="ui-g-3" />
+                        <h:outputText value="#{tipoRedeBean.tipoRede.produto}" class="ui-g-9" />
+                    </div>
+                    <div class="ui-g-12">
+                        <h:outputLabel value="Descrição " class="ui-g-3" />
+                        <h:outputText value="#{tipoRedeBean.tipoRede.descricao}" class="ui-g-9" />
+                    </div>
+                    <div class="ui-g-12">
+                        <h:outputLabel value="Observação " class="ui-g-3" />
+                        <h:outputText value="#{tipoRedeBean.tipoRede.observacao}" class="ui-g-9" />
+                    </div>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog> 
+             
     </ui:define>
 
 </ui:composition>

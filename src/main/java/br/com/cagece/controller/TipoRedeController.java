@@ -50,6 +50,7 @@ public class TipoRedeController implements Serializable {
     
     // EDITAR TIPO DE REDE
     public void editarTipoRede(TipoRede tipoRede){   
+        this.tipoRede = tipoRede;
     }
     
     // EXCLUIR TIPOS DE REDE
@@ -70,6 +71,10 @@ public class TipoRedeController implements Serializable {
     // GETTERS AND SETTERS
     public TipoRede getTipoRede() {
         return tipoRede;
+    }
+    
+    public void setTipoRede(TipoRede tipoRede){
+        this.tipoRede = tipoRede;
     }
     
     public Integer getTipoRedeId() {
