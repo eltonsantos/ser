@@ -7,14 +7,111 @@
         xmlns:p="http://primefaces.org/ui"
         template="/WEB-INF/templates/template.xhtml">
 	
-    <f:metadata>
-    </f:metadata>
+    <f:metadata></f:metadata>
 
     <ui:define name="title">
         Cadastrar Material
     </ui:define>
 
     <ui:define name="body">
+        
+        <h:form id="material">
+            <h:messages id="messages" />
+            
+            <div class="ui-g ui-fluid">              
+                <div class="ui-g-12">
+                    <p:outputLabel for="descricao_material" value="Descrição: " />
+                </div>
+                <div class="ui-g-12">
+                    <p:inputText id="descricao_material"
+                                 required="true" requiredMessage="Descrição obrigatória"
+                                 value="#{materialBean.material.descricao}" styleClass="form-control" />
+                </div>
+                
+                <div class="ui-g-12">
+                    <p:outputLabel for="observacao_material" value="Observação: " />
+                </div>
+                <div class="ui-g-12">
+                    <p:inputTextarea id="observacao_material" value="#{materialBean.material.observacao}"
+                                 styleClass="form-control" rows="10" cols="50" />
+                    
+                </div>               
+     
+                <div class="ui-g-12">
+                    <h:commandButton value="Cadastrar Material"
+                                     class="btn btn-success"
+                                     type="submit" action="#{materialBean.cadastrarMaterial}" />
+                </div>
+                
+            </div>
+        </h:form>
+        
+        <br />
+        <hr />
+        <br />
+        
+        <!-- LISTAR MATERIAIS CADASTRADOS -->
+        <h:form id="formTabelaMaterial">
+            
+            <h2>Materiais Cadastrados</h2>
+            
+            <h:outputText value="No momento ainda não há material cadastrado! Por favor cadastre um material."
+                          class="alert alert-warning ui-g-12"  rendered="#{empty materialBean.listarMaterial()}" />
+               
+            <h:dataTable value="#{materialBean.listarMaterial()}"
+                         var="material"
+                         id="tabelaMaterial"
+                         class="table table-striped table-hover"
+                         rendered="#{not empty materialBean.listarMaterial()}">
+                <h:column>
+                    <f:facet name="header">Descrição</f:facet>
+                    <h:outputText value="#{material.descricao}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Detalhar</f:facet>                                    
+                    <p:commandButton value="Detalhar"
+                                     oncomplete="PF('detalharMaterial').show();"
+                                     process="@this"
+                                     update="formDetalharMaterial">
+                        <f:setPropertyActionListener value="#{material}"
+                                                     target="#{materialBean.material}" />
+                    </p:commandButton>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Editar</f:facet>
+                    <h:commandLink value="Editar Material"
+                                   class="btn btn-info" action="#{materialBean.editarMaterial(material)}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:commandLink value="Excluir Material"
+                                   class="btn btn-danger" action="#{materialBean.excluirMaterial(material)}" onclick="return confirm('Você tem certeza?')" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        
+        
+        <p:dialog header="Detalhar material"
+                  widgetVar="detalharMaterial"
+                  modal="true"
+                  width="500"
+                  height="500"
+                  appendTo="@(body)"
+                  closable="true"
+                  id="formDetalharMaterial">
+            <h:form>
+                <p:panelGrid>
+                    <div class="ui-g-12">
+                        <h:outputLabel value="Descrição " class="ui-g-3" />
+                        <h:outputText value="#{materialBean.material.descricao}" class="ui-g-9" />
+                    </div>
+                    <div class="ui-g-12">
+                        <h:outputLabel value="Observação " class="ui-g-3" />
+                        <h:outputText value="#{materialBean.material.observacao}" class="ui-g-9" />
+                    </div>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog> 
         
     </ui:define>
 

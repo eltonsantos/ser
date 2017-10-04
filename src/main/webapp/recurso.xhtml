@@ -15,7 +15,103 @@
     </ui:define>
 
     <ui:define name="body">
+        <h:form id="recurso">
+            <h:messages id="messages" />
+            
+            <div class="ui-g ui-fluid">              
+                <div class="ui-g-12">
+                    <p:outputLabel for="descricao_recurso" value="Descrição: " />
+                </div>
+                <div class="ui-g-12">
+                    <p:inputText id="descricao_recurso"
+                                 required="true" requiredMessage="Descrição obrigatória"
+                                 value="#{recursoBean.recurso.descricao}" styleClass="form-control" />
+                </div>
+                
+                <div class="ui-g-12">
+                    <p:outputLabel for="observacao_recurso" value="Observação: " />
+                </div>
+                <div class="ui-g-12">
+                    <p:inputTextarea id="observacao_recurso" value="#{recursoBean.recurso.observacao}"
+                                 styleClass="form-control" rows="10" cols="50" />
+                    
+                </div>               
+     
+                <div class="ui-g-12">
+                    <h:commandButton value="Cadastrar Recurso"
+                                     class="btn btn-success"
+                                     type="submit" action="#{recursoBean.cadastrarRecurso}" />
+                </div>
+                
+            </div>
+        </h:form>
         
+        <br />
+        <hr />
+        <br />
+        
+        <!-- LISTAR RECURSOS CADASTRADOS -->
+        <h:form id="formTabelaRecurso">
+            
+            <h2>Recursos Cadastrados</h2>
+            
+            <h:outputText value="No momento ainda não há recurso cadastrado! Por favor cadastre um recurso."
+                          class="alert alert-warning ui-g-12"  rendered="#{empty recursoBean.listarRecurso()}" />
+               
+            <h:dataTable value="#{recursoBean.listarRecurso()}"
+                         var="recurso"
+                         id="tabelaRecurso"
+                         class="table table-striped table-hover"
+                         rendered="#{not empty recursoBean.listarRecurso()}">
+                <h:column>
+                    <f:facet name="header">Descrição</f:facet>
+                    <h:outputText value="#{recurso.descricao}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Detalhar</f:facet>                                    
+                    <p:commandButton value="Detalhar"
+                                     oncomplete="PF('detalharRecurso').show();"
+                                     process="@this"
+                                     update="formDetalharRecurso">
+                        <f:setPropertyActionListener value="#{recurso}"
+                                                     target="#{recursoBean.recurso}" />
+                    </p:commandButton>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Editar</f:facet>
+                    <h:commandLink value="Editar Recurso"
+                                   class="btn btn-info" action="#{recursoBean.editarRecurso(recurso)}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:commandLink value="Excluir Recurso"
+                                   class="btn btn-danger" action="#{recursoBean.excluirRecurso(recurso)}" onclick="return confirm('Você tem certeza?')" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        
+        
+        <p:dialog header="Detalhar recurso"
+                  widgetVar="detalharRecurso"
+                  modal="true"
+                  width="500"
+                  height="500"
+                  appendTo="@(body)"
+                  closable="true"
+                  id="formDetalharRecurso">
+            <h:form>
+                <p:panelGrid>
+                    <div class="ui-g-12">
+                        <h:outputLabel value="Descrição " class="ui-g-3" />
+                        <h:outputText value="#{recursoBean.recurso.descricao}" class="ui-g-9" />
+                    </div>
+                    <div class="ui-g-12">
+                        <h:outputLabel value="Observação " class="ui-g-3" />
+                        <h:outputText value="#{recursoBean.recurso.observacao}" class="ui-g-9" />
+                    </div>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
     </ui:define>
 
 </ui:composition>

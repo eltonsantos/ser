@@ -16,6 +16,63 @@
 
     <ui:define name="body">
         
+        <h:form id="diametro">
+            <h:messages id="messages" />
+            
+            <div class="ui-g ui-fluid">
+                              
+                <div class="ui-g-12">
+                    <p:outputLabel for="descricao_diametro" value="Descrição: " />
+                </div>
+                <div class="ui-g-12">
+                    <p:inputText id="descricao_diametro"
+                                 required="true" requiredMessage="Descrição obrigatória"
+                                 value="#{diametroBean.diametro.descricao}" styleClass="form-control" />
+                </div>
+     
+                <div class="ui-g-12">
+                    <h:commandButton value="Cadastrar Diâmetro"
+                                     class="btn btn-success"
+                                     type="submit" action="#{diametroBean.cadastrarDiametro}" />
+                </div>
+                
+            </div>
+        </h:form>
+        
+        <br />
+        <hr />
+        <br />
+        
+         <!-- LISTAR TIPOS DE REDE CADASTRADAS -->
+        <h:form id="formTabelaDiametro">
+            
+            <h2>Diâmetros Cadastrados</h2>
+            
+            <h:outputText value="No momento ainda não há diâmetro cadastrado! Por favor cadastre um diâmetro."
+                          class="alert alert-warning ui-g-12"  rendered="#{empty diametroBean.listarDiametro()}" />
+               
+            <h:dataTable value="#{diametroBean.listarDiametro()}"
+                         var="diametro"
+                         id="tabelaDiametro"
+                         class="table table-striped table-hover"
+                         rendered="#{not empty diametroBean.listarDiametro()}">
+                <h:column>
+                    <f:facet name="header">Descrição</f:facet>
+                    <h:outputText value="#{diametro.descricao}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Editar</f:facet>
+                    <h:commandLink value="Editar Diâmetro"
+                                   class="btn btn-info" action="#{diametroBean.editarDiametro(diametro)}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:commandLink value="Excluir Diâmetro"
+                                   class="btn btn-danger" action="#{diametroBean.excluirDiametro(diametro)}" onclick="return confirm('Você tem certeza?')" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        
     </ui:define>
 
 </ui:composition>

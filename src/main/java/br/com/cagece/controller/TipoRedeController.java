@@ -1,22 +1,19 @@
 package br.com.cagece.controller;
 
 import br.com.cagece.model.TipoRede;
-import br.com.cagece.util.NegocioException;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 
 @ViewScoped
 @Named("tipoRedeBean")
 public class TipoRedeController implements Serializable {
     
     @Inject
-    private EntityManager manager;
-    
+    private EntityManager manager;   
     private TipoRede tipoRede;
     private Integer tipoRedeId;
 

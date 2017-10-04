@@ -2,37 +2,68 @@
 	display: none; position: fixed; bottom: 10px; right: 20px; width: 34px; height: 34px; color: rgb(238, 238, 238); line-height: 34px; text-align: center; background-color: rgb(34, 45, 50); cursor: pointer; border-radius: 3px; z-index: 99999; opacity: 0.7;
 }
 
-.skin-blue .main-header .navbar {
-    background-color: #AEC503 !important;
+.main-header .navbar-custom-menu, .main-header .navbar-right {
+	float: left;
+	font-size: 30px;	
 }
-/*
-#239DCE
 
-#AEC503
-*/
+.skin-blue .main-header .navbar {
+    background-color: #039BE5 !important;
+}
 
 .logo {
-    background-color: #AEC503 !important;
+    background-color: #57BB37 !important;
+}
+
+.logo-lg {
+	background: url("images/logo-cagece-branco.png");
 }
 
 .main-sidebar {
-    background-color: #239DCE !important;
+    background-color: #EEE !important;
+    box-shadow: rgba(51, 51, 51, 0.32) 2px 0px 6px 0px;
 }
 
 .skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
-    color: #fff;
+    /*color: #fff;
     background: #239DCE;
-    border-left-color: #AEC503;
+    border-left-color: #57BB37;*/
+    color: #bbb;
+    background: #eee; 
+}
+
+.skin-blue .sidebar-menu>li>a.active {
+    background-color: #3c8dbc !important;
 }
 
 .sidebar-form .input-group input.form-control {
     background-color: #fff !important;
-    border: 0px;
-    
+    border: 0px;   
+}
+
+.skin-blue .sidebar a {
+    color: #bbb;
+}
+
+.sidebar li:hover a {
+    background-color: #eee !important;
+    color: #bbb !important;
+}
+
+.sidebar li a:hover {
+    background-color: #239DCE !important;
+    color: #ddd !important;
 }
 
 .skin-blue .sidebar-form {
     border: 0px !important;
+}
+
+li.active {
+	background-color: #fff !important;
+}
+.header {
+	background-color: #fff !important;
 }
 
 .skin-blue .sidebar-form .btn {
