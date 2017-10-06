@@ -35,7 +35,18 @@
                     <p:inputTextarea id="observacao_material" value="#{materialBean.material.observacao}"
                                  styleClass="form-control" rows="10" cols="50" />
                     
-                </div>               
+                </div>  
+                
+                <div class="ui-g-12">
+                    <h:outputLabel for="multiple" value="Associar diâmetro: " />
+                </div>
+                <div class="ui-g-12">
+                    <p:selectCheckboxMenu id="multiple" value="#{materialBean.material.diametros}"
+                                          label="Diâmetro"
+                                          filter="true" filterMatchMode="startsWith">
+                        <f:selectItems value="#{materialBean.material.diametros}" />
+                    </p:selectCheckboxMenu>                   
+                </div>
      
                 <div class="ui-g-12">
                     <h:commandButton value="Cadastrar Material"
